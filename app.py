@@ -4,8 +4,21 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 
 # Database configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://admin:123369Ugwueze@cis2368db.c6s8i3sqjaj6.us-east-1.rds.amazonaws.com/StockBrokerage'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+import mysql.connector
+
+# Define the connection parameters
+db_connection = mysql.connector.connect(
+    host="cis2368db.c6s8i3sqjaj6.us-east-1.rds.amazonaws.com",
+    user="admin",
+    password="123369Ugwueze",
+    database="Cis2336db"
+)
+
+# Test the connection
+if db_connection.is_connected():
+    print("Connected to the database")
+    db_connection.close()
+
 
 db = SQLAlchemy(app)
 
